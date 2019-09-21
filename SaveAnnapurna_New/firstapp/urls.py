@@ -28,7 +28,11 @@ urlpatterns = [
     path('mess_login/',mess_login_attempt),
 path('mess_signup/',mess_signup_attempt),
     path('mess_signup_data/',mess_register),
+path('stu_signup_data/',student_register),
 path('login/',mess_login,name="login"),
+path('login_stu/',student_login,name="login_stu"),
+    path('stu_login/',stu_login_attempt),
+path('stu_signup/',stu_signup_attempt),
   #  path('/login_student/',student_login_view),
   #  path('/signup_student/',register_student)
 ]
