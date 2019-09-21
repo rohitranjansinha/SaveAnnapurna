@@ -40,6 +40,7 @@ path('stu_signup/',stu_signup_attempt),
     path('logout/',logout),
     path('mess_details/',main_view),
     path('meal_detail/',meal_count),
+    path('email/',Email_View),
   #  path('/login_student/',student_login_view),
   #  path('/signup_student/',register_student)
 ]

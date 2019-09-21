@@ -122,3 +122,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     STATIC_DIR,
 )
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'meetrrs@gmail.com'
+EMAIL_HOST_PASSWORD = '2@Radhasoami'
+EMAIL_PORT = 587

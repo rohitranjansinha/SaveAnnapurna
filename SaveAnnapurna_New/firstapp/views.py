@@ -7,6 +7,8 @@ from django.urls import reverse
 import request
 import requests
 
+from django.core.mail import EmailMessage,send_mail
+
 #Making JSON encoder
 from json import JSONEncoder
 import json
@@ -221,14 +223,32 @@ def meal_count(request):
     obj = MealCount.objects.filter(mess=student[0].mess_name)
     if(obj):
         if(bf == 'true'):
-            obj.breakfast+=1
+            obj[0].breakfast+=1
         if(lunch == 'true'):
-            obj.lunch+=1
+            obj[0].lunch+=1
         if(dinner == 'true'):
-            obj.dinner+=1
-        obj.save()
+            obj[0].dinner+=1
+        obj[0].save()
     else:
         ob = MealCount(mess = student[0].mess_name, breakfast = 1, lunch = 1, dinner = 1)
         ob.save()
 
     return HttpResponseRedirect(reverse('firstapp:login_stu'))
+
+def Email_View(request):
+    mess = Mess.objects.filter(username = request.session['username'])
+    meals = MealCount.objects.filter(mess = mess[0].mess_name)
+    D = dict()
+    D['breakfast'] = str(meals[0].breakfast)
+    D['lunch'] = str(meals[0].lunch)
+    D['dinner'] = str(meals[0].dinner)
+
+    message = 'Total students for brekfast: '+D['breakfast']+' Total students for lunch: '+D['lunch']+' Total students for dinner: '+D['dinner']+' \nThankYou'
+    send_mail(
+        'Student Head Count For Meals',
+        message,
+        'meetrrs@gmail.com',
+        [mess[0].email],
+        fail_silently=False,
+    )
+    return HttpResponseRedirect(reverse('firstapp:login'))
