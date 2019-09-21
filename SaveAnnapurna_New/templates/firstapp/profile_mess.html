@@ -1,36 +1,187 @@
 {% load static from staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/jpg" href="{% static 'firstapp/images/logo.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="mess.css">
     <meta charset="UTF-8">
-    <title>{{ Mess.username }}</title>
+    <title>Save Annapurna</title>
 </head>
-<body>
-<h1>
-    HELLO WORLD
-</h1>
-<center>
-   <br>
-        <form method="post" action="/hospital_location/">
-            {% csrf_token %}
-        <input name="loc" style="margin-left:18%;width:40%;margin-right:2%;margin-top:-4.9%;position:absolute;"  type="text" value="" width="30%;" id="location">
-            <div>
-                    <a class="waves-effect waves-light btn " style="margin-left:72%;margin-top:-10%;width:45px;padding-left:12px;"  onclick="getLocation()"><i class="material-icons left">add_location</i></a>
-            <input class="waves-effect waves-light btn" type="submit" style="float:right; margin-right:16%; margin-top:-5.5%;" value="SUBMIT"/>
-            </div>
-        </form>
 
-<br>
-    <form method="post" action="/food_details/">
-        {% csrf_token %}
-    Chappati: <input type="text" name="chappati"><br>
-    Rice: <input type="text" name="rice"><br>
-    Dal: <input type="text" name="dal"><br>
-    Vegetables: <input type="text" name="veges"><BR>
-    Sweet: <input type="text" name="sweet"><br>
-    <input type="submit" value="UPDATE DATA">
-</form>
-</center>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('https://data1.ibtimes.co.in/en/full/622682/mid-day-meal.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.divider{
+    width:30px;
+    height:auto;
+    display:inline-block;
+}
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 500px;
+margin-top: auto;
+margin-bottom: auto;
+width: 600px;
+background-color: rgba(256,256,256,0.5) !important;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: black;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: black;
+background-color: #FFC312;
+width: 300px;
+height: 50px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+</style>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+    <img src="{% static 'firstapp/images/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+    Save Annapurna
+  </a>
+  <a class="navbar-brand" href="/logout/">Logout</a>
+
+</nav>
+<div class="container">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header">
+        <h1><b>Mess LeftOver Food Details</b></h1>
+
+      </div>
+      <div style="height: 20px;">
+
+          </div>
+      <div class="card-body">
+        <form method="post" action="/food_details/">
+            {% csrf_token %}
+          <div class="input-group form-group">
+
+            <input type="text" class="form-control" placeholder="location" id="location" name="loc">
+            <a class="btn btn-primary btn-lg btn-fill" onclick="getLocation()">
+              <span class="glyphicon glyphicon-map-marker"/></span>
+            </a>
+          </div>
+          <div style="height: 50px;">
+
+          </div>
+
+
+
+          <div class="input-group form-group">
+
+            <input type="text" class="form-control" placeholder="chappati" name="chappati">
+
+          </div>
+          <div class="input-group form-group">
+
+            <input type="text" class="form-control" placeholder="rice" name="rice">
+
+          </div>
+          <div class="input-group form-group">
+            <input type="text" class="form-control" placeholder="dal" name="dal">
+          </div>
+          <div class="input-group form-group">
+            <input type="text" class="form-control" placeholder="vegetables" name="veges">
+          </div>
+          <div class="input-group form-group">
+            <input type="text" class="form-control" placeholder="sweet" name="sweet">
+          </div>
+          <div style="height: 50px;">
+
+          </div>
+          <div class="form-group" style="text-align: center;">
+            <input type="submit" value="Submit" class="btn float-right login_btn" style="margin-right: 90px;">
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <script>
 

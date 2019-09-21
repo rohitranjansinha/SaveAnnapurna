@@ -26,13 +26,18 @@ urlpatterns = [
     path('', home_view, name="home"),
     path('food_details/',food_details_view),
     path('mess_login/',mess_login_attempt),
+path('ngo_login/',ngo_login_attempt),
 path('mess_signup/',mess_signup_attempt),
+path('ngo_signup/',ngo_signup_attempt),
     path('mess_signup_data/',mess_register),
+path('ngo_signup_data/',ngo_register),
 path('stu_signup_data/',student_register),
 path('login/',mess_login,name="login"),
 path('login_stu/',student_login,name="login_stu"),
+path('login_ngo/',ngo_login,name="login_ngo"),
     path('stu_login/',stu_login_attempt),
 path('stu_signup/',stu_signup_attempt),
+    path('logout/',logout),
   #  path('/login_student/',student_login_view),
   #  path('/signup_student/',register_student)
 ]
