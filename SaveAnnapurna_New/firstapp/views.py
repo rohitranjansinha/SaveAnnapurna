@@ -5,6 +5,16 @@ from .models import *
 from django.urls import reverse
 # Create your views here.
 import request
+import requests
+
+#Making JSON encoder
+from json import JSONEncoder
+import json
+class MyEncoder(JSONEncoder):
+        def default(self, o):
+            return o.__dict__
+
+
 
 
 def logout(request):
@@ -37,7 +47,7 @@ def food_details_view(request, *args):
         obj.save()
     mess = Mess.objects.filter(username = username)
     hostel = mess[0]
-    new_food = FoodDetails(mess=hostel,roti=chappati,rice=rice,dal=dal,sabji=veges,sweet=sweet)
+    new_food = FoodDetails(mess=hostel.username,roti=chappati,rice=rice,dal=dal,sabji=veges,sweet=sweet)
     new_food.save()
     return HttpResponseRedirect(reverse('firstapp:login'))
 
@@ -172,3 +182,32 @@ def ngo_login(request):
     else:
         print('Invalid User')
         return HttpResponseRedirect(reverse('firstapp:home'))
+
+
+def main_view(request):
+    location = request.POST.get('location')
+    url2 = '&mode=fastest;car;traffic:disabled'
+    url = url = 'https://route.api.here.com/routing/7.2/calculateroute.json?app_id=9Ab1yIULBo3Lj9plEA8t&app_code=JhmMlH2uPy4UEH5ShcXnMQ&waypoint0=geo!'+location+'&waypoint1=geo!'
+    mess = FoodDetails.objects.all()
+    final_list = list()
+    for obj in mess:
+        add = Mess_location.objects.filter(username=obj.mess)
+        new_ob = Results(mess = add[0].username,location=add[0].mess_lat+','+add[0].mess_lon,)
+        final_list.append(new_ob)
+        new_url = url + (add[0].mess_lat+','+add[0].mess_lon) + url2
+        response = requests.get(new_url)
+        data = response.json()
+        dis = data['response']['route'][0]['summary']['distance']
+        dur = data['response']['route'][0]['summary']['baseTime']
+        print('dis = ', dis)
+        print('dur = ', dur)
+        final_list[-1].distance = (float)(dis / 1000.0)
+        final_list[-1].time = (float)(dur / 3600.0)
+    final_list.sort(key=lambda x: x.distance, reverse=False)
+    for i in range(len(final_list)):
+        final_list[i] = json.dumps(final_list[i], cls=MyEncoder)
+    for i in range(len(final_list)):
+        final_list[i] = json.loads(final_list[i])
+    request.session['data'] = final_list
+    return HttpResponseRedirect(reverse('firstapp:login_ngo'))
+

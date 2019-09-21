@@ -39,4 +39,10 @@ class FoodDetails(models.Model):
     sabji = models.CharField(max_length=10)
     sweet = models.CharField(max_length=10)
 
+class Results(models.Model):
+    mess = models.CharField(max_length=60)
+    location = models.CharField(max_length=1000)
+    distance = models.DecimalField(null=True, max_digits=100, decimal_places=100)
+    time = models.DecimalField(null=True, max_digits=100, decimal_places=100)
+
 
