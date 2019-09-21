@@ -28,3 +28,13 @@ def mess_login_attempt(request):
 
 def mess_signup_attempt(request):
     return render(request, 'firstapp/signup_mess.html', {})
+
+def mess_register(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    mess_na = request.POST.get('mess_number')
+    emal = request.POST.get('email')
+    obj = Mess(username=username,password=password,email=emal,mess_name=mess_na)
+    obj.save();
+    return render(request, 'firstapp/home.html', {})
+
