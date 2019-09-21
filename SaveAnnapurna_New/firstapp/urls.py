@@ -24,10 +24,11 @@ app_name = 'firstapp'
 
 urlpatterns = [
     path('', home_view, name="home"),
-    path('/food_details/',food_details_view),
+    path('food_details/',food_details_view),
     path('mess_login/',mess_login_attempt),
 path('mess_signup/',mess_signup_attempt),
     path('mess_signup_data/',mess_register),
+path('login/',mess_login,name="login"),
   #  path('/login_student/',student_login_view),
   #  path('/signup_student/',register_student)
 ]

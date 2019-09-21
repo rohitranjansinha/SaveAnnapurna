@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MESS</title>
+</head>
+<body>
+<h1>
+    HELLO WORLD
+</h1>
+<center>
+   <br>
+        <form method="post" action="/hospital_location/">
+            {% csrf_token %}
+        <input name="loc" style="margin-left:18%;width:40%;margin-right:2%;margin-top:-4.9%;position:absolute;"  type="text" value="" width="30%;" id="location">
+            <div>
+                    <a class="waves-effect waves-light btn " style="margin-left:72%;margin-top:-10%;width:45px;padding-left:12px;"  onclick="getLocation()"><i class="material-icons left">add_location</i></a>
+            <input class="waves-effect waves-light btn" type="submit" style="float:right; margin-right:16%; margin-top:-5.5%;" value="SUBMIT"/>
+            </div>
+        </form>
+
+<br>
+    <form method="post" action="/food_details/">
+        {% csrf_token %}
+    Chappati: <input type="text" name="chappati"><br>
+    Rice: <input type="text" name="rice"><br>
+    Dal: <input type="text" name="dal"><br>
+    Vegetables: <input type="text" name="veges"><BR>
+    Sweet: <input type="text" name="sweet"><br>
+    <input type="submit" value="UPDATE DATA">
+</form>
+</center>
+
+<script>
+
+    var x = document.getElementById("location");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.value = position.coords.latitude +
+  "," + position.coords.longitude;
+}
+</script>
+</body>
+</html>

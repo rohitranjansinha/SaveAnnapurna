@@ -17,7 +17,7 @@ def food_details_view(request, *args):
     veges = request.POST.get('veges')
     sweet = request.POST.get('sweet')
     uname = request.session['username']
-    mess = Mess.object.exclude(username != uname)
+    mess = Mess.objects.filter(username = uname)
     hostel = mess[0]
     new_food = FoodDetails(mess=hostel,roti=chappati,rice=rice,dal=dal,sabji=veges,sweet=sweet)
     new_food.save()
@@ -38,3 +38,31 @@ def mess_register(request):
     obj.save();
     return render(request, 'firstapp/home.html', {})
 
+def mess_login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+
+    if (username != None and password != None):
+        request.session['username'] = username
+        request.session['password'] = password
+        request.session['data'] = None
+    else:
+        username = request.session['username']
+        password = request.session['password']
+    test = Mess.objects.filter(username=username).filter(password=password)
+    print('AJAX')
+    if (test):
+     #   context = {
+       #     'user': test[0],
+        #    'data': request.session['data'],
+       # }
+
+        print('Valid User')
+        test2 = test[0]
+        print(type(test2))
+        # if(request.session['data'] != None):
+        #   context['data'] = request.session['data']
+        return render(request, 'firstapp/profile_mess.html')#, context)
+    else:
+        print('Invalid User')
+        return HttpResponseRedirect(reverse('firstapp:home'))
