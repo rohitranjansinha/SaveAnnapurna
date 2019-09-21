@@ -21,6 +21,7 @@ def logout(request):
     request.session['username'] = None
     request.session['password'] = None
     request.session['data'] = None
+    Results.objects.all().delete()
     return render(request, 'firstapp/home.html', {})
 
 def home_view(request,*args,**kwargs):
@@ -211,3 +212,23 @@ def main_view(request):
     request.session['data'] = final_list
     return HttpResponseRedirect(reverse('firstapp:login_ngo'))
 
+def meal_count(request):
+    bf = request.POST.get('breakfast')
+    lunch = request.POST.get('lunch')
+    dinner = request.POST.get('dinner')
+    username = request.session['username']
+    student = Student.objects.filter(username=username)
+    obj = MealCount.objects.filter(mess=student[0].mess_name)
+    if(obj):
+        if(bf == 'true'):
+            obj.breakfast+=1
+        if(lunch == 'true'):
+            obj.lunch+=1
+        if(dinner == 'true'):
+            obj.dinner+=1
+        obj.save()
+    else:
+        ob = MealCount(mess = student[0].mess_name, breakfast = 1, lunch = 1, dinner = 1)
+        ob.save()
+
+    return HttpResponseRedirect(reverse('firstapp:login_stu'))

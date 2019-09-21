@@ -5,10 +5,235 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/jpg" href="{% static 'firstapp/images/logo.png' %}">
     <title>{{ user.username }}</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/jpg" href="{% static 'firstapp/images/logo.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="student.css">
 </head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+background-image: url('https://data1.ibtimes.co.in/en/full/622682/mid-day-meal.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.divider{
+    width:30px;
+    height:auto;
+    display:inline-block;
+}
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 600px;
+margin-top: auto;
+margin-bottom: auto;
+width: 600px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.card1{
+height: 100px;
+margin-top: auto;
+margin-bottom: auto;
+align:center;
+width: 550px;
+background-color: rgba(256,256,256,0.5) !important;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+.card-header h1{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: black;
+background-color: #FFC312;
+width: 300px;
+height: 50px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
+
+.logoutbtn{
+color: black;
+background-color: rgba(248,222,126,0.8) !important;
+width: 150px;
+height: 40px;
+margin-top: 15px;
+margin-left: 15px;
+}
+
+.logoutbtn:hover{
+color: black;
+background-color: white;
+}
+</style>
+
 <body>
-<h1>
-    Hello STUDENT
-</h1>
+
+<a href="/logout/">  <button class="logoutbtn" ><- LOG OUT</button> </a>
+<div class="container">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header">
+        <h1><b>Student Portal</b></h1>
+        <br>
+        <h3>Enter Food Needs for tommorow</h3>
+
+      </div>
+
+
+     <form method="post" action="/meal_detail/">
+         {% csrf_token %}
+      <div style="height: 20px;">
+
+          </div>
+      <div class="card-body">
+        <div class="card1">
+    <h2>Breakfast</h2>
+
+    <ul>
+      <li>
+        <input type="radio" name="breakfast" id="one" value="true" checked />
+        <b><label for="one">Will take meal!</label></b>
+
+        <div class="check"></div>
+      </li>
+
+      <li>
+        <input type="radio" name="breakfast" id="two" value="false" />
+        <b><label for="two">Will not take meal!</label></b>
+
+        <div class="check"></div>
+      </li>
+    </ul>
+  </div>
+<div style="height: 30px;">
+</div>
+
+  <div class="card1">
+  <h2>Lunch</h2>
+
+  <ul>
+    <li>
+      <input type="radio" name="lunch" id="one" value="true" checked />
+      <b><label for="one">Will take meal!</label></b>
+
+      <div class="check"></div>
+    </li>
+
+    <li>
+      <input type="radio" name="lunch" id="two" value="false" />
+      <b><label for="two">Will not take meal!</label></b>
+
+      <div class="check"></div>
+    </li>
+  </ul>
+</div>
+<div style="height: 30px;">
+</div>
+
+<div class="card1">
+<h2>Dinner</h2>
+
+<ul>
+  <li>
+    <input type="radio" name="dinner" id="one" value="true" checked />
+  <b>  <label for="one">Will take meal!</label></b>
+
+    <div class="check"></div>
+  </li>
+
+  <li>
+    <input type="radio" name="dinner" id="two" value="false" />
+    <b><label for="two">Will not take meal!</label></b>
+
+    <div class="check"></div>
+  </li>
+</ul>
+</div>
+<div style="height: 30px;">
+</div>
+<div class="form-group" style="text-align:center;">
+  <input type="submit" name="Submit" value="Submit" class="float-right login_btn" style="width:100px;margin-right:250px;background-color:(0,0,0,0.5);">
+</div>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>

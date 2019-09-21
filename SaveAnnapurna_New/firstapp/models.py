@@ -45,4 +45,8 @@ class Results(models.Model):
     distance = models.DecimalField(null=True, max_digits=100, decimal_places=100)
     time = models.DecimalField(null=True, max_digits=100, decimal_places=100)
 
-
+class MealCount(models.Model):
+    mess = models.CharField(max_length=60)
+    breakfast = models.IntegerField(null=True, default=0)
+    lunch = models.IntegerField(null=True, default=0)
+    dinner = models.IntegerField(null=True, default=0)
