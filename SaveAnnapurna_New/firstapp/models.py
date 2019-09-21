@@ -5,6 +5,7 @@ from django.db import models
 class Student(models.Model):
     username = models.CharField(max_length=60)
     password = models.CharField(max_length=1000)
+    mess_name = models.CharField(max_length=100)
     email = models.EmailField()
 
 class Mess(models.Model):
@@ -23,7 +24,7 @@ class NGO(models.Model):
     password = models.CharField(max_length=1000)
     ngo_name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.CharField(max_length=12)
+
 
 class NGO_location(models.Model):
     username = models.CharField(max_length=60)
