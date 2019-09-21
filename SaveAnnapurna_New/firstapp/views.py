@@ -10,7 +10,7 @@ import request
 def home_view(request,*args,**kwargs):
     return render(request, 'firstapp/home.html', {})
 
-def food_details(request, *args):
+def food_details_view(request, *args):
     chappati = request.POST.get('chappati')
     rice = request.POST.get('rice')
     dal = request.POST.get('dal')
@@ -21,3 +21,10 @@ def food_details(request, *args):
     hostel = mess[0]
     new_food = FoodDetails(mess=hostel,roti=chappati,rice=rice,dal=dal,sabji=veges,sweet=sweet)
     new_food.save()
+    return HttpResponseRedirect(reverse('firstapp:login'))
+
+def mess_login_attempt(request):
+    return render(request, 'firstapp/signin_mess.html', {})
+
+def mess_signup_attempt(request):
+    return render(request, 'firstapp/signup_mess.html', {})
