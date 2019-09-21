@@ -31,6 +31,12 @@ class NGO_location(models.Model):
     ngo_lat = models.CharField(max_length=1000)
     ngo_lon = models.CharField(max_length=100)
 
-
+class FoodDetails(models.Model):
+    mess = models.CharField(max_length=60)
+    roti = models.CharField(max_length=10)
+    rice = models.CharField(max_length=10)
+    dal = models.CharField(max_length=10)
+    sabji = models.CharField(max_length=10)
+    sweet = models.CharField(max_length=10)
 
 

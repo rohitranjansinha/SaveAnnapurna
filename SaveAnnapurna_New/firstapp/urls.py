@@ -24,6 +24,7 @@ app_name = 'firstapp'
 
 urlpatterns = [
     path('', home_view, name="home"),
+    path('/food_details/',food_details_view),
 ]
 
 
