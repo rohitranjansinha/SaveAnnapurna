@@ -254,7 +254,7 @@ def Email_View(request):
     D['lunch'] = str(meals[0].lunch)
     D['dinner'] = str(meals[0].dinner)
 
-    message = 'Total students for brekfast: '+D['breakfast']+'\nTotal students for lunch: '+D['lunch']+'\nTotal students for dinner: '+D['dinner']+' \nThankYou\nRegards\nSave Annapurna Team'
+    message = 'Total students for breakfast: '+D['breakfast']+'\nTotal students for lunch: '+D['lunch']+'\nTotal students for dinner: '+D['dinner']+' \nThankYou\nRegards\nSave Annapurna Team'
     send_mail(
         'Student Head Count For Meals',
         message,
