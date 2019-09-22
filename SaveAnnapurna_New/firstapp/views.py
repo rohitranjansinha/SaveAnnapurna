@@ -24,6 +24,7 @@ def logout(request):
     request.session['password'] = None
     request.session['data'] = None
     Results.objects.all().delete()
+    DummyModel.objects.all().delete()
     return render(request, 'firstapp/home.html', {})
 
 def home_view(request,*args,**kwargs):
@@ -131,7 +132,7 @@ def mess_login(request):
 def student_login(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
-
+    ob = DummyModel()
     if (username != None and password != None):
         request.session['username'] = username
         request.session['password'] = password
@@ -140,11 +141,16 @@ def student_login(request):
         username = request.session['username']
         password = request.session['password']
     test = Student.objects.filter(username=username).filter(password=password)
+    print('time: ',datetime.datetime.now().hour)
     print('AJAX')
     if (test):
         context = {
             'user': test[0],
             'data': request.session['data'],
+            'breakfast': 7,
+            'lunch': 11,
+            'dinner': 18,
+            'time': datetime.datetime.now().hour,
         }
 
         print('Valid User')
@@ -169,11 +175,16 @@ def ngo_login(request):
         username = request.session['username']
         password = request.session['password']
     test = NGO.objects.filter(username=username).filter(password=password)
+    loc = NGO_location.objects.filter(username=username)
+    ngo_loc = loc[0].ngo_lat+','+loc[0].ngo_lon;
+    print(ngo_loc)
+    request.session['loc'] = ngo_loc
     #print('AJAX')
     if (test):
         context = {
             'user': test[0],
             'data': request.session['data'],
+            'loc': request.session['loc'],
         }
 
         print('Valid User')
@@ -212,6 +223,7 @@ def main_view(request):
     for i in range(len(final_list)):
         final_list[i] = json.loads(final_list[i])
     request.session['data'] = final_list
+
     return HttpResponseRedirect(reverse('firstapp:login_ngo'))
 
 def meal_count(request):
@@ -243,7 +255,7 @@ def Email_View(request):
     D['lunch'] = str(meals[0].lunch)
     D['dinner'] = str(meals[0].dinner)
 
-    message = 'Total students for brekfast: '+D['breakfast']+' Total students for lunch: '+D['lunch']+' Total students for dinner: '+D['dinner']+' \nThankYou'
+    message = 'Total students for brekfast: '+D['breakfast']+'\nTotal students for lunch: '+D['lunch']+'\nTotal students for dinner: '+D['dinner']+' \nThankYou\nRegards\nSave Annapurna Team'
     send_mail(
         'Student Head Count For Meals',
         message,

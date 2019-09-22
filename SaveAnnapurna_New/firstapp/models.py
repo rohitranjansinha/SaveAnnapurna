@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+import datetime
 
 class Student(models.Model):
     username = models.CharField(max_length=60)
@@ -50,3 +51,14 @@ class MealCount(models.Model):
     breakfast = models.IntegerField(null=True, default=0)
     lunch = models.IntegerField(null=True, default=0)
     dinner = models.IntegerField(null=True, default=0)
+
+class DummyModel(models.Model):
+    lunch_end = models.IntegerField(default=11)
+    breakfast_end = models.IntegerField(default=7)
+    dinner_end = models.IntegerField(default=18)
+    def isBreakfast(self):
+        return ((datetime.datetime.now().hour)<7)
+    def isLunch(self):
+        return ((datetime.datetime.now().hour)<11)
+    def isDinner(self):
+        return ((datetime.datetime.now().hour)<18)

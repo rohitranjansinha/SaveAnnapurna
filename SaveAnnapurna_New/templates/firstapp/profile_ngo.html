@@ -127,6 +127,10 @@ background-color: white;
 </style>
 
 <body>
+
+{% with ngo as location %}
+
+<P>{{ ngo }}</P>
 <a href="/logout/">  <button class="logoutbtn" ><- LOG OUT</button> </a>
  <div class="container1">
   <div class="d-flex justify-content-center h-100">
@@ -175,6 +179,10 @@ background-color: white;
             Travel Distance - {{ i.distance }} <br>
              Travel Time - {{ i.time }}<br>
             </p>
+    <hr>
+    <p>
+        <a href="https://www.google.com/maps/dir/{{ loc }}/{{ i.location }}" target="_blank">Navigate to Mess</a>
+    </p>
             </div>
             </div>
             <br>
@@ -183,7 +191,7 @@ background-color: white;
 </div>
 {% endif %}
                                              </div>
-
+{% endwith %}
 
 
 
