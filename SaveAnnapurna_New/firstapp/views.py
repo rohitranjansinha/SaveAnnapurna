@@ -147,10 +147,7 @@ def student_login(request):
         context = {
             'user': test[0],
             'data': request.session['data'],
-            'breakfast': 7,
-            'lunch': 11,
-            'dinner': 18,
-            'time': datetime.datetime.now().hour,
+            'time': (datetime.datetime.now().hour),
         }
 
         print('Valid User')
@@ -249,8 +246,10 @@ def meal_count(request):
 
 def Email_View(request):
     mess = Mess.objects.filter(username = request.session['username'])
+    print('mess_name: ', mess[0].mess_name)
     meals = MealCount.objects.filter(mess = mess[0].mess_name)
     D = dict()
+    print('len: ',len(meals))
     D['breakfast'] = str(meals[0].breakfast)
     D['lunch'] = str(meals[0].lunch)
     D['dinner'] = str(meals[0].dinner)

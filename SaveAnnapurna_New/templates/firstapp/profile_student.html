@@ -141,7 +141,10 @@ background-color: white;
 </style>
 
 <body>
-
+{% with 5 as breakfast  %}
+{% with 11 as lunch %}
+{% with 18 as dinner %}
+{% with time as x%}
 <a href="/logout/">  <button class="logoutbtn" ><- LOG OUT</button> </a>
 <div class="container">
   <div class="d-flex justify-content-center h-100">
@@ -161,7 +164,7 @@ background-color: white;
           </div>
       <div class="card-body">
         <div class="card1">
-    {% if time < breakfast %}
+    {% if x < breakfast %}
     <h2>Breakfast</h2>
 
     <ul>
@@ -182,8 +185,49 @@ background-color: white;
   </div>
 <div style="height: 30px;">
 </div>
-    {% endif %}
-    {% if time < lunch %}
+<div class="card1">
+  <h2>Lunch</h2>
+
+  <ul>
+    <li>
+      <input type="radio" name="lunch" id="one" value="true" checked />
+      <b><label for="one">Will take meal!</label></b>
+
+      <div class="check"></div>
+    </li>
+
+    <li>
+      <input type="radio" name="lunch" id="two" value="false" />
+      <b><label for="two">Will not take meal!</label></b>
+
+      <div class="check"></div>
+    </li>
+  </ul>
+</div>
+<div style="height: 30px;">
+</div>
+
+<div class="card1">
+<h2>Dinner</h2>
+
+<ul>
+  <li>
+    <input type="radio" name="dinner" id="one" value="true" checked />
+  <b>  <label for="one">Will take meal!</label></b>
+
+    <div class="check"></div>
+  </li>
+
+  <li>
+    <input type="radio" name="dinner" id="two" value="false" />
+    <b><label for="two">Will not take meal!</label></b>
+
+    <div class="check"></div>
+  </li>
+</ul>
+</div>
+
+    {% elif x < lunch %}
   <div class="card1">
   <h2>Lunch</h2>
 
@@ -205,7 +249,26 @@ background-color: white;
 </div>
 <div style="height: 30px;">
 </div>
-{% if time < dinner %}
+          <div class="card1">
+<h2>Dinner</h2>
+
+<ul>
+  <li>
+    <input type="radio" name="dinner" id="one" value="true" checked />
+  <b>  <label for="one">Will take meal!</label></b>
+
+    <div class="check"></div>
+  </li>
+
+  <li>
+    <input type="radio" name="dinner" id="two" value="false" />
+    <b><label for="two">Will not take meal!</label></b>
+
+    <div class="check"></div>
+  </li>
+</ul>
+</div>
+{% elif x < 18 %}
 
 
 <div class="card1">
@@ -227,7 +290,12 @@ background-color: white;
   </li>
 </ul>
 </div>
-          {% endif %}
+          {% else %}
+{% endif %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
+{% endwith %}
 <div style="height: 30px;">
 </div>
 
